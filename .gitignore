@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.output/
+.vite/
+*.log
+.env
+.env.*
+!.env.example
+data/*.sqlite
+data/*.sqlite-*
+data/resumes/generated/
+apps/extension/dist/
+coverage/
+.DS_Store
+*.pem
