@@ -2,7 +2,7 @@ import type { LlmClient } from "@astra/core";
 
 const PROVIDER_DEFAULTS: Record<string, { base: string; model: string }> = {
   deepseek: { base: "https://api.deepseek.com", model: "deepseek-chat" },
-  openrouter: { base: "https://openrouter.ai/api/v1", model: "deepseek/deepseek-chat:free" },
+  openrouter: { base: "https://openrouter.ai/api/v1", model: "openrouter/free" },
   xai: { base: "https://api.x.ai/v1", model: "grok-4.5" },
 };
 

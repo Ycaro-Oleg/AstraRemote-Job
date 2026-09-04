@@ -87,22 +87,29 @@ Default base URL (you do not need to set it): `https://api.deepseek.com`
 
 If `deepseek-chat` is renamed in their console, copy the current chat model id from their models page and set `LLM_MODEL`.
 
-### Option B — OpenRouter (closest thing to “free models”)
+### Option B — OpenRouter (gratis, Qwen / router free)
 
-There is no serious, unlimited free API that will write 100 decent cover letters a week. OpenRouter is the practical free/cheap playground:
+Nao precisa cartao. Limite tipico: ~20 req/min e ~50 req/dia nos modelos `:free` (sobe pra ~1000/dia se um dia voce colocar ~US$10 de credito, e opcional).
 
-1. Open [https://openrouter.ai](https://openrouter.ai) → sign in (GitHub is fine).
-2. Keys → **Create key**.
-3. Models → filter **Free**. Free ids usually end with `:free` (they change; pick a current one in the dashboard).
-4. Free models are rate-limited and sometimes disappear. Fine for testing; for a volume week use DeepSeek or a paid OpenRouter model.
+1. Abra [https://openrouter.ai](https://openrouter.ai) → sign in com GitHub.
+2. **Keys** → **Create key** (`sk-or-...`).
+3. Confira o catalogo live: [openrouter.ai/models?max_price=0](https://openrouter.ai/models?max_price=0). Ids `:free` rotacionam.
 
 ```env
 LLM_PROVIDER=openrouter
 LLM_API_KEY=sk-or-...
-LLM_MODEL=deepseek/deepseek-chat:free
+LLM_MODEL=openrouter/free
 ```
 
-If the `:free` id 404s, open the OpenRouter models page and paste a live free (or cheap) id. Default base URL: `https://openrouter.ai/api/v1`
+`openrouter/free` escolhe sozinho um modelo gratis disponivel. Se quiser cravar Qwen (o que a galera do OpenCode cita):
+
+```env
+LLM_MODEL=qwen/qwen3-coder:free
+```
+
+Se esse id 404, copia outro `:free` da pagina de models. Base URL padrao: `https://openrouter.ai/api/v1`.
+
+OpenCode + Muse Spark + Qwen e um **agente de codigo no terminal**, nao substitui a Astra. A mesma chave OpenRouter pode ir no OpenCode (coding) e no `.env` da Astra (carta/resume). Sao dois apps.
 
 ### Option C — Muse Spark (Meta Model API)
 
