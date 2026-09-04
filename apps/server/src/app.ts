@@ -6,6 +6,7 @@ import { db } from "./db/client.ts";
 import { companyBoards, jobs } from "./db/schema.ts";
 import { buildPacket } from "./packet.ts";
 import { getProfile, saveProfile } from "./profile.ts";
+import { importCapturedJob } from "./importJob.ts";
 import { refreshAll, rescore } from "./refresh.ts";
 
 export const app = new Hono();
@@ -60,6 +61,16 @@ app.delete("/api/boards/:id", (c) => {
   const id = Number(c.req.param("id"));
   db.delete(companyBoards).where(eq(companyBoards.id, id)).run();
   return c.json({ ok: true });
+});
+
+app.post("/api/jobs/import", async (c) => {
+  try {
+    const body = await c.req.json();
+    const result = importCapturedJob(body);
+    return c.json(result, result.created ? 201 : 200);
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : "import failed" }, 400);
+  }
 });
 
 app.post("/api/refresh", async (c) => {

@@ -1,4 +1,17 @@
-export type Ats = "greenhouse" | "lever" | "ashby";
+export type Ats =
+  | "greenhouse"
+  | "lever"
+  | "ashby"
+  | "remotive"
+  | "remoteok"
+  | "wwr"
+  | "himalayas"
+  | "arbeitnow"
+  | "jobicy"
+  | "captured";
+
+export const CATALOG_ATS: Ats[] = ["greenhouse", "lever", "ashby"];
+export const FEED_ATS: Ats[] = ["remotive", "remoteok", "wwr", "himalayas", "arbeitnow", "jobicy"];
 export type BoardKind = "rails" | "marketplace" | "remote_first";
 export type HiringGeo = "worldwide" | "us_auth_only" | "eu_permit_only" | "unknown";
 export type RoleFit = "rails" | "backend" | "fullstack" | "marketplace" | "no";

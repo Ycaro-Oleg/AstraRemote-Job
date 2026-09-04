@@ -72,4 +72,10 @@ export function migrate() {
     );
     CREATE UNIQUE INDEX IF NOT EXISTS jobs_board_external ON jobs (company_board_id, external_id);
   `);
+
+  const cols = sqlite.prepare("PRAGMA table_info(jobs)").all() as { name: string }[];
+  if (!cols.some((c) => c.name === "fingerprint")) {
+    sqlite.exec("ALTER TABLE jobs ADD COLUMN fingerprint TEXT");
+  }
+  sqlite.exec("CREATE INDEX IF NOT EXISTS jobs_fingerprint ON jobs (fingerprint)");
 }

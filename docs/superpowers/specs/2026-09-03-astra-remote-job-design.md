@@ -135,11 +135,20 @@ Skipped auth/title jobs are stored with `status = skipped` so the user can resto
 
 ### Sources (v1)
 
-Public JSON only:
+Public feeds and APIs:
 
 - Greenhouse: `GET https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true`
 - Lever: `GET https://api.lever.co/v0/postings/{slug}?mode=json`
 - Ashby: `GET https://api.ashbyhq.com/posting-api/job-board/{slug}`
+- Remotive: `GET https://remotive.com/api/remote-jobs?category={slug}`
+- RemoteOK: `GET https://remoteok.com/api?tag={slug}`
+- We Work Remotely: official RSS (`backend`, `programming`)
+- Himalayas: `GET https://himalayas.app/jobs/api/search?q={slug}`
+- Arbeitnow: `GET https://www.arbeitnow.com/api/job-board-api`
+- Jobicy: `GET https://jobicy.com/api/v2/remote-jobs?tag={slug}`
+- **Captured:** `POST /api/jobs/import` from a page the user opened (LinkedIn, Indeed, Wellfound, Glassdoor). No crawl, no fake accounts.
+
+Duplicate roles collapse via `fingerprint(company, title)`. A Greenhouse/Lever/Ashby apply URL upgrades an aggregator/captured row. Partial feeds (Remotive, RemoteOK, WWR, Himalayas, Jobicy, Arbeitnow) do **not** mark unseen jobs as `posting_removed`.
 
 User-Agent: a descriptive local client string (e.g. `AstraRemote-Job/0.1 (personal; localhost)`). Timeout 20s. One board failure must not abort the rest; set `lastError` and continue.
 

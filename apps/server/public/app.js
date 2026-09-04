@@ -49,7 +49,7 @@ async function renderQueue(status = "queued") {
         <div class="score">${Math.round(j.score)}</div>
         <div>
           <div class="title"><a href="#/jobs/${j.id}">${esc(j.title)}</a></div>
-          <div class="meta">${esc(j.company)} · ${esc(j.location || "—")} · ${esc(j.roleFit)} · ${esc(j.hiringGeo)} · ${esc(j.region)}</div>
+          <div class="meta">${esc(j.company)} · ${esc(j.ats)} · ${esc(j.location || "—")} · ${esc(j.roleFit)} · ${esc(j.hiringGeo)}</div>
         </div>
         <div><button data-open="${j.id}">Apply</button></div>
       </div>`,
@@ -127,7 +127,7 @@ async function renderBoards() {
     <div class="card">
       <div class="row">
         <input id="b-name" placeholder="Name" />
-        <select id="b-ats"><option>greenhouse</option><option>lever</option><option>ashby</option></select>
+        <select id="b-ats"><option>greenhouse</option><option>lever</option><option>ashby</option><option>remotive</option><option>remoteok</option><option>wwr</option><option>himalayas</option><option>arbeitnow</option><option>jobicy</option></select>
         <input id="b-slug" placeholder="slug" />
         <select id="b-kind"><option>rails</option><option>marketplace</option><option>remote_first</option></select>
         <button id="b-add">Add</button>

@@ -17,6 +17,6 @@ cp .env.example .env   # optional LLM key — hunting works without it
 pnpm dev               # http://127.0.0.1:8790
 ```
 
-Click **Refresh boards**, then work the queue. Load the Chrome extension from `apps/extension` (unpacked). You click Submit on every application.
+Click **Refresh boards**, then work the queue. Load the Chrome extension from `apps/extension` (unpacked). On LinkedIn/Indeed/Wellfound/Glassdoor, click **Enviar para Astra**. You click Submit on every application.
 
 Full usage, API keys, and the 100-apps week: [GUIDE.md](GUIDE.md).

@@ -23,7 +23,7 @@ JobHunter at `~/PortfolioProjects/JobHunter` is a **reference only**. Do not edi
 
 ## Guardrails
 
-- Public ATS job-board JSON only (Greenhouse, Lever, Ashby) in v1.
+- Public feeds only for auto-poll (Greenhouse, Lever, Ashby, Remotive, RemoteOK, WWR, Himalayas, Arbeitnow, Jobicy). LinkedIn/Indeed/Wellfound/Glassdoor enter via user capture, never via a crawler or fake account.
 - Commits have no `Co-authored-by` trailer.
 - Do not add LinkedIn, Workday, Indeed, or Glassdoor clients.
 - Do not add captcha solving or unattended form submit.

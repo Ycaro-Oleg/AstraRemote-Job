@@ -72,6 +72,7 @@ export const jobs = sqliteTable(
     tailoredResumePdfPath: text("tailored_resume_pdf_path"),
     appliedAt: text("applied_at"),
     notes: text("notes"),
+    fingerprint: text("fingerprint"),
   },
   (t) => [uniqueIndex("jobs_board_external").on(t.companyBoardId, t.externalId)],
 );

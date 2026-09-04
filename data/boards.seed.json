@@ -47,5 +47,16 @@
   { "name": "Brex", "ats": "ashby", "slug": "brex", "kind": "remote_first", "locationHint": "US + remote" },
   { "name": "Anthropic", "ats": "ashby", "slug": "anthropic", "kind": "remote_first", "locationHint": "US + remote" },
   { "name": "Retool", "ats": "ashby", "slug": "retool", "kind": "remote_first", "locationHint": "Remote-friendly" },
-  { "name": "Rippling", "ats": "ashby", "slug": "rippling", "kind": "remote_first", "locationHint": "US + remote" }
+  { "name": "Rippling", "ats": "ashby", "slug": "rippling", "kind": "remote_first", "locationHint": "US + remote" },
+
+  { "name": "Remotive (software-dev)", "ats": "remotive", "slug": "software-dev", "kind": "remote_first", "locationHint": "Public Remotive API" },
+  { "name": "RemoteOK (dev)", "ats": "remoteok", "slug": "dev", "kind": "remote_first", "locationHint": "Public RemoteOK API" },
+  { "name": "RemoteOK (ruby)", "ats": "remoteok", "slug": "ruby", "kind": "rails", "locationHint": "Public RemoteOK API" },
+  { "name": "We Work Remotely (backend)", "ats": "wwr", "slug": "backend", "kind": "remote_first", "locationHint": "Official WWR RSS" },
+  { "name": "We Work Remotely (programming)", "ats": "wwr", "slug": "programming", "kind": "remote_first", "locationHint": "Official WWR RSS" },
+  { "name": "Himalayas (rails)", "ats": "himalayas", "slug": "rails", "kind": "rails", "locationHint": "Public Himalayas search API" },
+  { "name": "Himalayas (ruby backend)", "ats": "himalayas", "slug": "ruby backend", "kind": "rails", "locationHint": "Public Himalayas search API" },
+  { "name": "Arbeitnow", "ats": "arbeitnow", "slug": "feed", "kind": "remote_first", "locationHint": "Public Arbeitnow API (EU-heavy)" },
+  { "name": "Jobicy (dev)", "ats": "jobicy", "slug": "dev", "kind": "remote_first", "locationHint": "Public Jobicy API" },
+  { "name": "Captured (you sent)", "ats": "captured", "slug": "manual", "kind": "remote_first", "locationHint": "LinkedIn / Indeed / Wellfound / Glassdoor tabs" }
 ]

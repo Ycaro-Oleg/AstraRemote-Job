@@ -4,7 +4,7 @@ This is your layoff-insurance cockpit. It finds roles that match a mid-level Rai
 
 Hunting does not use an LLM. The model is only for cover letters, “why this company”, and the optional tailored resume.
 
-Until the TypeScript apps exist, this guide is the operating contract. After they ship, follow it as written.
+There is no LinkedIn crawl and no fake LinkedIn account. LinkedIn/Indeed/Wellfound/Glassdoor jobs enter the tool when **you** open the posting and click **Enviar para Astra** on the page. Public feeds (We Work Remotely, Remotive, RemoteOK, Himalayas, Arbeitnow, Jobicy) are polled automatically.
 
 ## What a good week looks like
 
@@ -172,17 +172,29 @@ Save. After changing skills or titles, rescore existing jobs from the UI.
 
 ## 4. Boards (the hunt)
 
-v1 polls **public** Greenhouse, Lever, and Ashby JSON only. Seed list: `data/boards.seed.json` (Rails-friendly, remote-first backend, LatAm marketplaces).
+Automatic polling uses **public feeds and APIs only**:
 
-Add a company:
+| Source | How |
+|---|---|
+| Greenhouse / Lever / Ashby | Company job-board JSON |
+| Remotive | Official `GET /api/remote-jobs?category=software-dev` |
+| RemoteOK | Official `GET /api?tag=dev` (and `ruby`) |
+| We Work Remotely | Official RSS (`backend` + `programming`) |
+| Himalayas | Official search API (`rails`, `ruby backend`) |
+| Arbeitnow | Official job-board API |
+| Jobicy | Official `v2/remote-jobs` |
+
+Seed list: `data/boards.seed.json`. Duplicate roles across boards collapse to one row (company+title fingerprint). A Greenhouse/Lever/Ashby apply URL wins over an aggregator link.
+
+Add a company ATS board:
 
 1. Open its careers page.
-2. If the URL looks like `job-boards.greenhouse.io/gitlab` → ATS `greenhouse`, slug `gitlab`.
+2. `job-boards.greenhouse.io/gitlab` → ATS `greenhouse`, slug `gitlab`.
 3. `jobs.lever.co/toptal` → `lever` / `toptal`.
 4. `jobs.ashbyhq.com/linear` → `ashby` / `linear`.
-5. Add it in the UI (name, ATS, slug, kind: `rails` | `marketplace` | `remote_first`).
+5. Add it in the UI.
 
-Workday, Lever-behind-login, Shopify custom, LinkedIn: out of v1. Apply those by hand with the packet copy buttons if you really want them.
+**LinkedIn, Indeed, Wellfound, Glassdoor** have no public jobs API. A fake account is not a solution (ban risk, ToS, and it still does not give you a stable feed). With the extension loaded, open the job on your **real** account and click **Enviar para Astra**. If the description contains a Greenhouse/Lever/Ashby URL, that becomes the apply link.
 
 Refresh: button in the UI, or the in-process scheduler every few hours while `pnpm dev` is running.
 
@@ -252,14 +264,14 @@ Marketplace apps (Toptal, Turing, Andela, Deel, Remote.com) are often longer and
 | File input did not attach | Download/open the PDF from the panel and attach manually. |
 | Board fetch failed | One board’s `last_error` is fine. Fix the slug or disable that board. |
 | Chrome blocked the extension on the ATS page | Content-script matches; reload the unpacked extension after pulls. |
+| No “Enviar para Astra” on LinkedIn | Reload the unpacked extension. The server must be running. Use your real LinkedIn session. |
 
 ## 11. Things this tool will not do
 
-- Log into LinkedIn / Easy Apply bots
+- Fake LinkedIn/Indeed accounts, crawlers, or Easy Apply bots
 - Submit the form for you
 - Bypass captcha
-- Poll Workday / Indeed / Glassdoor
 - Invent resume experience
 - Host this on the public internet
 
-Those get accounts banned or you caught in a lie. The 100/week target is **you** submitting filled forms, not a spray bot.
+LinkedIn/Indeed/Wellfound/Glassdoor still work via **Enviar para Astra** on a page you opened. The 100/week target is **you** submitting filled forms, not a spray bot.

@@ -10,7 +10,15 @@
     "https://job-boards.greenhouse.io/*",
     "https://*.greenhouse.io/*",
     "https://jobs.lever.co/*",
-    "https://jobs.ashbyhq.com/*"
+    "https://jobs.ashbyhq.com/*",
+    "https://www.linkedin.com/*",
+    "https://linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://wellfound.com/*",
+    "https://*.glassdoor.com/*",
+    "https://weworkremotely.com/*",
+    "https://remotive.com/*",
+    "https://remoteok.com/*"
   ],
   "action": {
     "default_title": "AstraRemote-Job"
@@ -31,6 +39,20 @@
         "https://jobs.ashbyhq.com/*"
       ],
       "js": ["content.js"]
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/jobs/*",
+        "https://linkedin.com/jobs/*",
+        "https://*.indeed.com/*",
+        "https://wellfound.com/*",
+        "https://*.glassdoor.com/job-listing/*",
+        "https://*.glassdoor.com/Job/*",
+        "https://weworkremotely.com/remote-jobs/*",
+        "https://remotive.com/remote-jobs/*",
+        "https://remoteok.com/*"
+      ],
+      "js": ["capture.js"]
     }
   ]
 }
