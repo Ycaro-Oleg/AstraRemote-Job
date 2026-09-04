@@ -1,0 +1,14 @@
+{
+  "jobs": [
+    {
+      "id": "job_1",
+      "title": "Full Stack Engineer",
+      "location": "Remote - Worldwide",
+      "jobUrl": "https://jobs.ashbyhq.com/deel/job_1",
+      "applyUrl": "https://jobs.ashbyhq.com/deel/job_1/application",
+      "descriptionHtml": "<div>Rails and React</div>",
+      "publishedAt": "2026-08-20T00:00:00.000Z",
+      "isRemote": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@astra/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "refresh": "tsx src/cli.ts refresh"
+  },
+  "dependencies": {
+    "@astra/core": "workspace:*",
+    "@hono/node-server": "^1.19.0",
+    "better-sqlite3": "^12.2.0",
+    "dotenv": "^16.6.1",
+    "drizzle-orm": "^0.44.5",
+    "hono": "^4.9.6"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

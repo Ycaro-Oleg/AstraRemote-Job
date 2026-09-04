@@ -28,9 +28,10 @@ Requirements: Node 22+, pnpm, Chrome, this repo.
 
 ```bash
 cd ~/PortfolioProjects/AstraRemote-Job
+corepack enable && corepack prepare pnpm@9.15.0 --activate
 pnpm install
 cp .env.example .env
-# edit .env — see API keys below
+# edit .env — see API keys below (optional; hunting works with no key)
 pnpm dev
 ```
 

@@ -258,9 +258,9 @@ Skill matching is **count**, not ratio. A long skills list must not dilute the s
 Among jobs where `status` is `new` or `queued`, not hard-skipped, `queuedOn` is today or null:
 
 1. Sort by `score` desc, then `postedAt` desc.
-2. Take `N` (default 20, user-configurable 10–50).
+2. Take `N` (default 20, user-configurable 10–50), **at most 2 jobs per company**, then fill remaining slots without the cap so a volume day still fills.
 3. Set those to `queued` and `queuedOn = today`.
-4. Jobs queued a previous day and still untouched stay queued (do not vanish at midnight); they count toward today’s cap only if `queuedOn = today`. Untouched leftover queued jobs remain visible in “Queue” (status filter), not forcibly dropped.
+4. Rebuilding the queue first returns untouched `queued` rows to `new`, then assigns today’s N. In-progress `applying` and later statuses are left alone. A job that falls out of the top N is not lost; it can re-enter tomorrow.
 
 The Queue page default view: `status = queued` ordered by score.
 

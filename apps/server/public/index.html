@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AstraRemote-Job</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <strong>AstraRemote-Job</strong>
+      <nav>
+        <a href="#/queue">Queue</a>
+        <a href="#/skipped">Skipped</a>
+        <a href="#/applied">Applied</a>
+        <a href="#/boards">Boards</a>
+        <a href="#/profile">Profile</a>
+      </nav>
+      <div class="header-actions">
+        <span id="stats" class="muted"></span>
+        <button id="refresh">Refresh boards</button>
+      </div>
+    </header>
+    <main id="app">Loading…</main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

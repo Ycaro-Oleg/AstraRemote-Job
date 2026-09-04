@@ -1,0 +1,11 @@
+{
+  "name": "astra-remote-job",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @astra/server dev",
+    "test": "pnpm --filter @astra/core test",
+    "refresh": "pnpm --filter @astra/server refresh"
+  }
+}

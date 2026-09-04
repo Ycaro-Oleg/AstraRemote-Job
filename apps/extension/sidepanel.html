@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Astra apply</title>
+    <style>
+      body { font: 14px/1.4 sans-serif; margin: 12px; }
+      button { margin: 6px 0; }
+      textarea { width: 100%; height: 180px; }
+      .muted { color: #555; }
+      .err { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <p class="muted">Talks to http://127.0.0.1:8790. You click Submit on the company site.</p>
+    <label>Job id <input id="jobId" type="number" /></label>
+    <p>
+      <button id="load">Load packet</button>
+      <button id="fill">Fill this tab</button>
+      <button id="applied">Mark applied</button>
+    </p>
+    <div id="status" class="muted"></div>
+    <textarea id="letter" placeholder="Cover letter"></textarea>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
