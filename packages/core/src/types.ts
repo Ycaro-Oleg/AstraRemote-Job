@@ -13,7 +13,12 @@ export type Ats =
 export const CATALOG_ATS: Ats[] = ["greenhouse", "lever", "ashby"];
 export const FEED_ATS: Ats[] = ["remotive", "remoteok", "wwr", "himalayas", "arbeitnow", "jobicy"];
 export type BoardKind = "rails" | "marketplace" | "remote_first";
-export type HiringGeo = "worldwide" | "us_auth_only" | "eu_permit_only" | "unknown";
+export type HiringGeo =
+  | "worldwide"
+  | "us_auth_only"
+  | "eu_permit_only"
+  | "country_locked"
+  | "unknown";
 export type RoleFit = "rails" | "backend" | "fullstack" | "marketplace" | "no";
 export type JobStatus =
   | "new"
@@ -36,6 +41,7 @@ export type RawPosting = {
   applyUrl: string;
   description: string;
   postedAt: Date | null;
+  expiresAt?: Date | null;
 };
 
 export type FetchResult = { postings: RawPosting[] };

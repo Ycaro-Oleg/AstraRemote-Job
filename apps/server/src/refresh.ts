@@ -1,9 +1,10 @@
 import {
   CATALOG_ATS,
-  classifyAuth,
+  classifyHiringGeo,
   classifyTitle,
   fetchBoard,
   fingerprint,
+  isExpired,
   isHardSkip,
   regionFor,
   scoreJob,
@@ -29,19 +30,24 @@ export function classifyJobId(jobId: number) {
   const board = db.select().from(companyBoards).where(eq(companyBoards.id, job.companyBoardId)).all()[0];
   const profile = getProfile();
   const kind = (board?.kind ?? "remote_first") as BoardKind;
-  const blob = `${job.title}\n${job.location}\n${job.description}`;
-  const hiringGeo = classifyAuth(blob);
+  const hiringGeo = classifyHiringGeo({
+    title: job.title,
+    location: job.location,
+    description: job.description,
+  });
   const roleFit = classifyTitle(job.title, job.description, kind);
   const region = regionFor(job.location, job.title);
+  const postedAt = job.postedAt ? new Date(job.postedAt) : null;
+  const expiresAt = job.expiresAt ? new Date(job.expiresAt) : null;
   const score = scoreJob({
     title: job.title,
     description: job.description,
-    postedAt: job.postedAt ? new Date(job.postedAt) : null,
+    postedAt,
     hiringGeo,
     boardKind: kind,
     skills: profile.skills,
   });
-  const skip = isHardSkip(roleFit, hiringGeo);
+  const skip = isHardSkip(roleFit, hiringGeo) || isExpired(postedAt, expiresAt);
   db.update(jobs)
     .set({
       hiringGeo,
@@ -65,20 +71,24 @@ export function classifyAndScoreAll() {
     if ((TERMINAL as readonly string[]).includes(job.status)) continue;
     const board = boardById.get(job.companyBoardId);
     const kind = (board?.kind ?? "remote_first") as BoardKind;
-    const blob = `${job.title}\n${job.location}\n${job.description}`;
-    const hiringGeo = classifyAuth(blob);
+    const hiringGeo = classifyHiringGeo({
+      title: job.title,
+      location: job.location,
+      description: job.description,
+    });
     const roleFit = classifyTitle(job.title, job.description, kind);
     const region = regionFor(job.location, job.title);
+    const postedAt = job.postedAt ? new Date(job.postedAt) : null;
+    const expiresAt = job.expiresAt ? new Date(job.expiresAt) : null;
     const score = scoreJob({
       title: job.title,
       description: job.description,
-      postedAt: job.postedAt ? new Date(job.postedAt) : null,
+      postedAt,
       hiringGeo,
       boardKind: kind,
       skills: profile.skills,
     });
-    const skip = isHardSkip(roleFit, hiringGeo);
-    const nextStatus = skip && job.status !== "skipped" && job.status !== "queued" ? "skipped" : job.status;
+    const skip = isHardSkip(roleFit, hiringGeo) || isExpired(postedAt, expiresAt);
     db.update(jobs)
       .set({
         hiringGeo,
@@ -86,7 +96,7 @@ export function classifyAndScoreAll() {
         region,
         score,
         fingerprint: job.fingerprint || fingerprint(job.company, job.title),
-        status: skip ? "skipped" : nextStatus === "skipped" && !skip ? "new" : job.status,
+        status: skip ? "skipped" : job.status === "skipped" && !skip ? "new" : job.status,
       })
       .where(eq(jobs.id, job.id))
       .run();
@@ -101,7 +111,14 @@ export function rebuildQueue(limit = 20) {
     .from(jobs)
     .where(notInArray(jobs.status, keep))
     .all()
-    .filter((j) => !isHardSkip(j.roleFit as "rails", j.hiringGeo as "worldwide"))
+    .filter((j) => {
+      const postedAt = j.postedAt ? new Date(j.postedAt) : null;
+      const expiresAt = j.expiresAt ? new Date(j.expiresAt) : null;
+      return (
+        !isHardSkip(j.roleFit as "rails", j.hiringGeo as "worldwide") &&
+        !isExpired(postedAt, expiresAt)
+      );
+    })
     .sort((a, b) => b.score - a.score || (b.postedAt ?? "").localeCompare(a.postedAt ?? ""));
 
   const date = today();

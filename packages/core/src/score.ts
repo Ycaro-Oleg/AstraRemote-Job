@@ -63,7 +63,8 @@ export function scoreJob(input: {
     else if (days <= 30) recency = 5;
   }
 
-  const authPenalty = input.hiringGeo === "unknown" ? -8 : 0;
+  const authPenalty =
+    input.hiringGeo === "unknown" ? -8 : input.hiringGeo === "country_locked" ? -20 : 0;
 
   const raw = titlePoints + skillPoints + remotePoints + marketplaceBonus + recency + authPenalty;
   return Math.max(0, Math.min(100, Math.round(raw)));

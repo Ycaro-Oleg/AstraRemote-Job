@@ -23,6 +23,7 @@ export function upsertPosting(
     applyUrl: p.applyUrl,
     description: p.description,
     postedAt: p.postedAt ? p.postedAt.toISOString() : null,
+    expiresAt: p.expiresAt ? p.expiresAt.toISOString() : null,
     fingerprint: fp,
   };
 

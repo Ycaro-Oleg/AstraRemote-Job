@@ -77,5 +77,8 @@ export function migrate() {
   if (!cols.some((c) => c.name === "fingerprint")) {
     sqlite.exec("ALTER TABLE jobs ADD COLUMN fingerprint TEXT");
   }
+  if (!cols.some((c) => c.name === "expires_at")) {
+    sqlite.exec("ALTER TABLE jobs ADD COLUMN expires_at TEXT");
+  }
   sqlite.exec("CREATE INDEX IF NOT EXISTS jobs_fingerprint ON jobs (fingerprint)");
 }

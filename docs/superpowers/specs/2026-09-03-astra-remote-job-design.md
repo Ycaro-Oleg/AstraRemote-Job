@@ -223,7 +223,7 @@ If both worldwide-hire phrases **and** a skip phrase appear, **skip wins**.
 
 Else `unknown`.
 
-Hard skip from the queue: `hiringGeo` in `us_auth_only`, `eu_permit_only` **or** `roleFit = no`. Those rows get `status = skipped` (unless already applied/interviewing/offer/rejected).
+Hard skip from the queue: `hiringGeo` in `us_auth_only`, `eu_permit_only`, `country_locked`, **or** `roleFit = no`, **or** the posting is expired (`expiresAt` in the past, or `postedAt` older than 35 days). Country lock includes “US only”, “Spain only”, UK/EU office cities, and location lists that do not include Brazil / LATAM / worldwide. Brazil and LATAM stay. Those rows get `status = skipped` (unless already applied/interviewing/offer/rejected).
 
 ### Region
 

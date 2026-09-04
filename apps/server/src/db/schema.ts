@@ -60,6 +60,7 @@ export const jobs = sqliteTable(
     applyUrl: text("apply_url").notNull(),
     description: text("description").notNull().default(""),
     postedAt: text("posted_at"),
+    expiresAt: text("expires_at"),
     region: text("region").notNull().default("other"),
     hiringGeo: text("hiring_geo").notNull().default("unknown"),
     roleFit: text("role_fit").notNull().default("no"),

@@ -48,5 +48,6 @@ describe("isHardSkip", () => {
     expect(isHardSkip("rails", "us_auth_only")).toBe(true);
     expect(isHardSkip("backend", "eu_permit_only")).toBe(true);
     expect(isHardSkip("rails", "worldwide")).toBe(false);
+    expect(isHardSkip("rails", "country_locked")).toBe(true);
   });
 });

@@ -48,5 +48,10 @@ export function classifyTitle(title: string, description: string, kind: BoardKin
 }
 
 export function isHardSkip(roleFit: RoleFit, hiringGeo: HiringGeo): boolean {
-  return roleFit === "no" || hiringGeo === "us_auth_only" || hiringGeo === "eu_permit_only";
+  return (
+    roleFit === "no" ||
+    hiringGeo === "us_auth_only" ||
+    hiringGeo === "eu_permit_only" ||
+    hiringGeo === "country_locked"
+  );
 }
