@@ -16,7 +16,7 @@ export type {
 } from "./types.ts";
 export { CATALOG_ATS, FEED_ATS } from "./types.ts";
 export { classifyAuth, classifyHiringGeo, isExpired, MAX_POST_AGE_DAYS } from "./classifyAuth.ts";
-export { classifyTitle, isHardSkip } from "./classifyTitle.ts";
+export { classifyTitle, isHardSkip, isUnconfirmedRemote } from "./classifyTitle.ts";
 export { regionFor } from "./region.ts";
 export { scoreJob } from "./score.ts";
 export { htmlToText } from "./htmlToText.ts";

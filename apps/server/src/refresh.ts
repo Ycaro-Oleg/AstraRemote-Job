@@ -6,6 +6,7 @@ import {
   fingerprint,
   isExpired,
   isHardSkip,
+  isUnconfirmedRemote,
   regionFor,
   scoreJob,
   type Ats,
@@ -47,7 +48,10 @@ export function classifyJobId(jobId: number) {
     boardKind: kind,
     skills: profile.skills,
   });
-  const skip = isHardSkip(roleFit, hiringGeo) || isExpired(postedAt, expiresAt);
+  const skip =
+    isHardSkip(roleFit, hiringGeo) ||
+    isUnconfirmedRemote(hiringGeo, kind) ||
+    isExpired(postedAt, expiresAt);
   db.update(jobs)
     .set({
       hiringGeo,
@@ -88,7 +92,10 @@ export function classifyAndScoreAll() {
       boardKind: kind,
       skills: profile.skills,
     });
-    const skip = isHardSkip(roleFit, hiringGeo) || isExpired(postedAt, expiresAt);
+    const skip =
+      isHardSkip(roleFit, hiringGeo) ||
+      isUnconfirmedRemote(hiringGeo, kind) ||
+      isExpired(postedAt, expiresAt);
     db.update(jobs)
       .set({
         hiringGeo,
@@ -105,6 +112,8 @@ export function classifyAndScoreAll() {
 
 export function rebuildQueue(limit = 20) {
   const keep = [...TERMINAL, "skipped", "applying"] as string[];
+  const boards = db.select().from(companyBoards).all();
+  const boardById = new Map(boards.map((b) => [b.id, b]));
   db.update(jobs).set({ status: "new", queuedOn: null }).where(eq(jobs.status, "queued")).run();
   const candidates = db
     .select()
@@ -114,8 +123,10 @@ export function rebuildQueue(limit = 20) {
     .filter((j) => {
       const postedAt = j.postedAt ? new Date(j.postedAt) : null;
       const expiresAt = j.expiresAt ? new Date(j.expiresAt) : null;
+      const kind = (boardById.get(j.companyBoardId)?.kind ?? "remote_first") as BoardKind;
       return (
         !isHardSkip(j.roleFit as "rails", j.hiringGeo as "worldwide") &&
+        !isUnconfirmedRemote(j.hiringGeo as "unknown", kind) &&
         !isExpired(postedAt, expiresAt)
       );
     })

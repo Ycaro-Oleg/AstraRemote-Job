@@ -55,3 +55,8 @@ export function isHardSkip(roleFit: RoleFit, hiringGeo: HiringGeo): boolean {
     hiringGeo === "country_locked"
   );
 }
+
+/** "Remote" with no Brazil/LATAM/worldwide signal is almost always a US/EU seat. */
+export function isUnconfirmedRemote(hiringGeo: HiringGeo, boardKind: BoardKind): boolean {
+  return hiringGeo === "unknown" && boardKind !== "marketplace";
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { classifyTitle, isHardSkip } from "./classifyTitle.ts";
+import { classifyTitle, isHardSkip, isUnconfirmedRemote } from "./classifyTitle.ts";
 
 describe("classifyTitle", () => {
   it("keeps Rails engineer", () => {
@@ -49,5 +49,14 @@ describe("isHardSkip", () => {
     expect(isHardSkip("backend", "eu_permit_only")).toBe(true);
     expect(isHardSkip("rails", "worldwide")).toBe(false);
     expect(isHardSkip("rails", "country_locked")).toBe(true);
+  });
+});
+
+describe("isUnconfirmedRemote", () => {
+  it("drops generic Remote on normal boards, keeps marketplace", () => {
+    expect(isUnconfirmedRemote("unknown", "remote_first")).toBe(true);
+    expect(isUnconfirmedRemote("unknown", "rails")).toBe(true);
+    expect(isUnconfirmedRemote("unknown", "marketplace")).toBe(false);
+    expect(isUnconfirmedRemote("worldwide", "remote_first")).toBe(false);
   });
 });
